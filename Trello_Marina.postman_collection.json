@@ -1,0 +1,1791 @@
+{
+	"info": {
+		"_postman_id": "1b65224d-9677-40e3-812f-e61f3265a97f",
+		"name": "Trello_Marina",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40618365"
+	},
+	"item": [
+		{
+			"name": "Boards",
+			"item": [
+				{
+					"name": "Create a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 3000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"const result = pm.response.json().id;\r",
+									"console.log(result);\r",
+									"pm.environment.set(\"id_board\",result);\r",
+									"\r",
+									"\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\r",
+									"        \"id\",\r",
+									"        \"name\",\r",
+									"        \"desc\",\r",
+									"        \"descData\",\r",
+									"        \"closed\",\r",
+									"        \"idOrganization\",\r",
+									"        \"idEnterprise\",\r",
+									"        \"pinned\",\r",
+									"        \"url\",\r",
+									"        \"shortUrl\",\r",
+									"        \"prefs\",\r",
+									"        \"labelNames\",\r",
+									"        \"limits\"\r",
+									"    ],\r",
+									"    \"additionalProperties\": true,\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"name\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"desc\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"descData\": {\r",
+									"            \"type\": \"null\"\r",
+									"        },\r",
+									"        \"closed\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"        },\r",
+									"        \"idOrganization\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"idEnterprise\": {\r",
+									"            \"type\": \"null\"\r",
+									"        },\r",
+									"        \"pinned\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"        },\r",
+									"        \"url\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"shortUrl\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"prefs\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"required\": [\r",
+									"                \"permissionLevel\",\r",
+									"                \"hideVotes\",\r",
+									"                \"voting\",\r",
+									"                \"comments\",\r",
+									"                \"invitations\",\r",
+									"                \"selfJoin\",\r",
+									"                \"cardCovers\",\r",
+									"                \"showCompleteStatus\",\r",
+									"                \"cardCounts\",\r",
+									"                \"isTemplate\",\r",
+									"                \"cardAging\",\r",
+									"                \"calendarFeedEnabled\",\r",
+									"                \"hiddenPluginBoardButtons\",\r",
+									"                \"switcherViews\",\r",
+									"                \"background\",\r",
+									"                \"backgroundColor\",\r",
+									"                \"backgroundDarkColor\",\r",
+									"                \"backgroundImage\",\r",
+									"                \"backgroundDarkImage\",\r",
+									"                \"backgroundImageScaled\",\r",
+									"                \"backgroundTile\",\r",
+									"                \"backgroundBrightness\",\r",
+									"                \"sharedSourceUrl\",\r",
+									"                \"backgroundBottomColor\",\r",
+									"                \"backgroundTopColor\",\r",
+									"                \"canBePublic\",\r",
+									"                \"canBeEnterprise\",\r",
+									"                \"canBeOrg\",\r",
+									"                \"canBePrivate\",\r",
+									"                \"canInvite\"\r",
+									"            ],\r",
+									"            \"additionalProperties\": true,\r",
+									"            \"properties\": {\r",
+									"                \"permissionLevel\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"hideVotes\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"voting\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"comments\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"invitations\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"selfJoin\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"cardCovers\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"showCompleteStatus\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"cardCounts\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"isTemplate\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"cardAging\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"calendarFeedEnabled\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"hiddenPluginBoardButtons\": {\r",
+									"                    \"type\": \"array\",\r",
+									"                    \"additionalItems\": true,\r",
+									"                    \"items\": {}\r",
+									"                },\r",
+									"                \"switcherViews\": {\r",
+									"                    \"type\": \"array\",\r",
+									"                    \"additionalItems\": true,\r",
+									"                    \"items\": {\r",
+									"                        \"type\": \"object\",\r",
+									"                        \"required\": [\r",
+									"                            \"viewType\",\r",
+									"                            \"enabled\"\r",
+									"                        ],\r",
+									"                        \"additionalProperties\": true,\r",
+									"                        \"properties\": {\r",
+									"                            \"viewType\": {\r",
+									"                                \"type\": \"string\"\r",
+									"                            },\r",
+									"                            \"enabled\": {\r",
+									"                                \"type\": \"boolean\"\r",
+									"                            }\r",
+									"                        }\r",
+									"                    }\r",
+									"                },\r",
+									"                \"background\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"backgroundColor\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"backgroundDarkColor\": {\r",
+									"                    \"type\": \"null\"\r",
+									"                },\r",
+									"                \"backgroundImage\": {\r",
+									"                    \"type\": \"null\"\r",
+									"                },\r",
+									"                \"backgroundDarkImage\": {\r",
+									"                    \"type\": \"null\"\r",
+									"                },\r",
+									"                \"backgroundImageScaled\": {\r",
+									"                    \"type\": \"null\"\r",
+									"                },\r",
+									"                \"backgroundTile\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"backgroundBrightness\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"sharedSourceUrl\": {\r",
+									"                    \"type\": \"null\"\r",
+									"                },\r",
+									"                \"backgroundBottomColor\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"backgroundTopColor\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"canBePublic\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"canBeEnterprise\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"canBeOrg\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"canBePrivate\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"canInvite\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                }\r",
+									"            }\r",
+									"        },\r",
+									"        \"labelNames\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"required\": [\r",
+									"                \"green\",\r",
+									"                \"yellow\",\r",
+									"                \"orange\",\r",
+									"                \"red\",\r",
+									"                \"purple\",\r",
+									"                \"blue\",\r",
+									"                \"sky\",\r",
+									"                \"lime\",\r",
+									"                \"pink\",\r",
+									"                \"black\",\r",
+									"                \"green_dark\",\r",
+									"                \"yellow_dark\",\r",
+									"                \"orange_dark\",\r",
+									"                \"red_dark\",\r",
+									"                \"purple_dark\",\r",
+									"                \"blue_dark\",\r",
+									"                \"sky_dark\",\r",
+									"                \"lime_dark\",\r",
+									"                \"pink_dark\",\r",
+									"                \"black_dark\",\r",
+									"                \"green_light\",\r",
+									"                \"yellow_light\",\r",
+									"                \"orange_light\",\r",
+									"                \"red_light\",\r",
+									"                \"purple_light\",\r",
+									"                \"blue_light\",\r",
+									"                \"sky_light\",\r",
+									"                \"lime_light\",\r",
+									"                \"pink_light\",\r",
+									"                \"black_light\"\r",
+									"            ],\r",
+									"            \"additionalProperties\": true,\r",
+									"            \"properties\": {\r",
+									"                \"green\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"yellow\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"orange\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"red\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"purple\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"blue\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"sky\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"lime\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"pink\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"black\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"green_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"yellow_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"orange_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"red_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"purple_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"blue_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"sky_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"lime_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"pink_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"black_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"green_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"yellow_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"orange_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"red_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"purple_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"blue_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"sky_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"lime_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"pink_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"black_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                }\r",
+									"            }\r",
+									"        },\r",
+									"        \"limits\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"required\": [],\r",
+									"            \"additionalProperties\": true,\r",
+									"            \"properties\": {}\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/boards/?name=my_board_Marina2&key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "my_board_Marina2"
+								},
+								{
+									"key": "fields",
+									"value": "name,closed,idOrganization,url,id",
+									"disabled": true
+								},
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 3000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\r",
+									"        \"id\",\r",
+									"        \"name\",\r",
+									"        \"closed\",\r",
+									"        \"idOrganization\",\r",
+									"        \"url\"\r",
+									"    ],\r",
+									"    \"additionalProperties\": true,\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"name\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"closed\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"        },\r",
+									"        \"idOrganization\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"url\": {\r",
+									"            \"type\": \"string\"\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/boards/{{id_board}}?fields=name,closed,idOrganization,url&key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boards",
+								"{{id_board}}"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "name,closed,idOrganization,url"
+								},
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the Members of a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"additionalItems\": true,\r",
+									"    \"items\": {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\r",
+									"            \"id\",\r",
+									"            \"fullName\",\r",
+									"            \"username\"\r",
+									"        ],\r",
+									"        \"additionalProperties\": true,\r",
+									"        \"properties\": {\r",
+									"            \"id\": {\r",
+									"                \"type\": \"string\"\r",
+									"            },\r",
+									"            \"fullName\": {\r",
+									"                \"type\": \"string\"\r",
+									"            },\r",
+									"            \"username\": {\r",
+									"                \"type\": \"string\"\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"}\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});\r",
+									"\r",
+									"const userName = pm.response.json();\r",
+									"console.log(userName);\r",
+									"pm.environment.set(\"id_member\",userName[0].username);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/boards/{{id_board}}/members?key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boards",
+								"{{id_board}}",
+								"members"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\r",
+									"        \"id\",\r",
+									"        \"name\",\r",
+									"        \"desc\",\r",
+									"        \"descData\",\r",
+									"        \"closed\",\r",
+									"        \"idOrganization\",\r",
+									"        \"idEnterprise\",\r",
+									"        \"pinned\",\r",
+									"        \"url\",\r",
+									"        \"shortUrl\",\r",
+									"        \"prefs\",\r",
+									"        \"labelNames\"\r",
+									"    ],\r",
+									"    \"additionalProperties\": true,\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"name\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"desc\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"descData\": {\r",
+									"            \"type\": \"null\"\r",
+									"        },\r",
+									"        \"closed\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"        },\r",
+									"        \"idOrganization\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"idEnterprise\": {\r",
+									"            \"type\": \"null\"\r",
+									"        },\r",
+									"        \"pinned\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"        },\r",
+									"        \"url\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"shortUrl\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"prefs\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"required\": [\r",
+									"                \"permissionLevel\",\r",
+									"                \"hideVotes\",\r",
+									"                \"voting\",\r",
+									"                \"comments\",\r",
+									"                \"invitations\",\r",
+									"                \"selfJoin\",\r",
+									"                \"cardCovers\",\r",
+									"                \"showCompleteStatus\",\r",
+									"                \"cardCounts\",\r",
+									"                \"isTemplate\",\r",
+									"                \"cardAging\",\r",
+									"                \"calendarFeedEnabled\",\r",
+									"                \"hiddenPluginBoardButtons\",\r",
+									"                \"switcherViews\",\r",
+									"                \"background\",\r",
+									"                \"backgroundColor\",\r",
+									"                \"backgroundDarkColor\",\r",
+									"                \"backgroundImage\",\r",
+									"                \"backgroundDarkImage\",\r",
+									"                \"backgroundImageScaled\",\r",
+									"                \"backgroundTile\",\r",
+									"                \"backgroundBrightness\",\r",
+									"                \"sharedSourceUrl\",\r",
+									"                \"backgroundBottomColor\",\r",
+									"                \"backgroundTopColor\",\r",
+									"                \"canBePublic\",\r",
+									"                \"canBeEnterprise\",\r",
+									"                \"canBeOrg\",\r",
+									"                \"canBePrivate\",\r",
+									"                \"canInvite\"\r",
+									"            ],\r",
+									"            \"additionalProperties\": true,\r",
+									"            \"properties\": {\r",
+									"                \"permissionLevel\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"hideVotes\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"voting\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"comments\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"invitations\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"selfJoin\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"cardCovers\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"showCompleteStatus\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"cardCounts\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"isTemplate\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"cardAging\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"calendarFeedEnabled\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"hiddenPluginBoardButtons\": {\r",
+									"                    \"type\": \"array\",\r",
+									"                    \"additionalItems\": true,\r",
+									"                    \"items\": {}\r",
+									"                },\r",
+									"                \"switcherViews\": {\r",
+									"                    \"type\": \"array\",\r",
+									"                    \"additionalItems\": true,\r",
+									"                    \"items\": {\r",
+									"                        \"type\": \"object\",\r",
+									"                        \"required\": [\r",
+									"                            \"viewType\",\r",
+									"                            \"enabled\"\r",
+									"                        ],\r",
+									"                        \"additionalProperties\": true,\r",
+									"                        \"properties\": {\r",
+									"                            \"viewType\": {\r",
+									"                                \"type\": \"string\"\r",
+									"                            },\r",
+									"                            \"enabled\": {\r",
+									"                                \"type\": \"boolean\"\r",
+									"                            }\r",
+									"                        }\r",
+									"                    }\r",
+									"                },\r",
+									"                \"background\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"backgroundColor\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"backgroundDarkColor\": {\r",
+									"                    \"type\": \"null\"\r",
+									"                },\r",
+									"                \"backgroundImage\": {\r",
+									"                    \"type\": \"null\"\r",
+									"                },\r",
+									"                \"backgroundDarkImage\": {\r",
+									"                    \"type\": \"null\"\r",
+									"                },\r",
+									"                \"backgroundImageScaled\": {\r",
+									"                    \"type\": \"null\"\r",
+									"                },\r",
+									"                \"backgroundTile\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"backgroundBrightness\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"sharedSourceUrl\": {\r",
+									"                    \"type\": \"null\"\r",
+									"                },\r",
+									"                \"backgroundBottomColor\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"backgroundTopColor\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"canBePublic\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"canBeEnterprise\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"canBeOrg\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"canBePrivate\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                },\r",
+									"                \"canInvite\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                }\r",
+									"            }\r",
+									"        },\r",
+									"        \"labelNames\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"required\": [\r",
+									"                \"green\",\r",
+									"                \"yellow\",\r",
+									"                \"orange\",\r",
+									"                \"red\",\r",
+									"                \"purple\",\r",
+									"                \"blue\",\r",
+									"                \"sky\",\r",
+									"                \"lime\",\r",
+									"                \"pink\",\r",
+									"                \"black\",\r",
+									"                \"green_dark\",\r",
+									"                \"yellow_dark\",\r",
+									"                \"orange_dark\",\r",
+									"                \"red_dark\",\r",
+									"                \"purple_dark\",\r",
+									"                \"blue_dark\",\r",
+									"                \"sky_dark\",\r",
+									"                \"lime_dark\",\r",
+									"                \"pink_dark\",\r",
+									"                \"black_dark\",\r",
+									"                \"green_light\",\r",
+									"                \"yellow_light\",\r",
+									"                \"orange_light\",\r",
+									"                \"red_light\",\r",
+									"                \"purple_light\",\r",
+									"                \"blue_light\",\r",
+									"                \"sky_light\",\r",
+									"                \"lime_light\",\r",
+									"                \"pink_light\",\r",
+									"                \"black_light\"\r",
+									"            ],\r",
+									"            \"additionalProperties\": true,\r",
+									"            \"properties\": {\r",
+									"                \"green\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"yellow\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"orange\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"red\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"purple\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"blue\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"sky\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"lime\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"pink\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"black\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"green_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"yellow_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"orange_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"red_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"purple_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"blue_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"sky_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"lime_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"pink_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"black_dark\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"green_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"yellow_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"orange_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"red_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"purple_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"blue_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"sky_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"lime_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"pink_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"black_light\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                }\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/boards/{{id_board}}?key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boards",
+								"{{id_board}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\r",
+									"        \"_value\"\r",
+									"    ],\r",
+									"    \"additionalProperties\": true,\r",
+									"    \"properties\": {\r",
+									"        \"_value\": {\r",
+									"            \"type\": \"null\"\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/boards/{{id_board}}?key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boards",
+								"{{id_board}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Board after Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body is equal: The requested resource was not found.\", function () {\r",
+									"    pm.response.to.have.body(\"The requested resource was not found.\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/boards/{{id_board}}?key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boards",
+								"{{id_board}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Members",
+			"item": [
+				{
+					"name": "Get Boards that Member belongs to",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"additionalItems\": true,\r",
+									"    \"items\": {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\r",
+									"            \"id\",\r",
+									"            \"name\",\r",
+									"            \"closed\",\r",
+									"            \"idOrganization\",\r",
+									"            \"url\"\r",
+									"        ],\r",
+									"        \"additionalProperties\": true,\r",
+									"        \"properties\": {\r",
+									"            \"id\": {\r",
+									"                \"type\": \"string\"\r",
+									"            },\r",
+									"            \"name\": {\r",
+									"                \"type\": \"string\"\r",
+									"            },\r",
+									"            \"closed\": {\r",
+									"                \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"idOrganization\": {\r",
+									"                \"type\": \"string\"\r",
+									"            },\r",
+									"            \"url\": {\r",
+									"                \"type\": \"string\"\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/members/{{id_member}}/boards?key={{APIKey}}&token={{APIToken}}&fields=name,closed,idOrganization,url,id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"members",
+								"{{id_member}}",
+								"boards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								},
+								{
+									"key": "fields",
+									"value": "name,closed,idOrganization,url,id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a member",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\r",
+									"        \"id\",\r",
+									"        \"url\"\r",
+									"    ],\r",
+									"    \"additionalProperties\": true,\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"url\": {\r",
+									"            \"type\": \"string\"\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/members/{{id_member}}?key={{APIKey}}&token={{APIToken}}&fields=name,closed,idOrganization,url",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"members",
+								"{{id_member}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								},
+								{
+									"key": "fields",
+									"value": "name,closed,idOrganization,url"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Star for Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"var result = pm.response.json().id;\r",
+									"pm.environment.set(\"id_star\", result);\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\r",
+									"        \"id\",\r",
+									"        \"idBoard\",\r",
+									"        \"pos\"\r",
+									"    ],\r",
+									"    \"additionalProperties\": true,\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"idBoard\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pos\": {\r",
+									"            \"type\": \"integer\"\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema) \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/members/{{id_member}}/boardStars?idBoard=5abbe4b7ddc1b351ef961414&pos=top&key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"members",
+								"{{id_member}}",
+								"boardStars"
+							],
+							"query": [
+								{
+									"key": "idBoard",
+									"value": "5abbe4b7ddc1b351ef961414"
+								},
+								{
+									"key": "pos",
+									"value": "top"
+								},
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Member's boardStars",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"additionalItems\": true,\r",
+									"    \"items\": {\r",
+									"        \"type\": \"object\",\r",
+									"        \"required\": [\r",
+									"            \"id\",\r",
+									"            \"idBoard\",\r",
+									"            \"pos\"\r",
+									"        ],\r",
+									"        \"additionalProperties\": true,\r",
+									"        \"properties\": {\r",
+									"            \"id\": {\r",
+									"                \"type\": \"string\"\r",
+									"            },\r",
+									"            \"idBoard\": {\r",
+									"                \"type\": \"string\"\r",
+									"            },\r",
+									"            \"pos\": {\r",
+									"                \"type\": \"integer\"\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/members/{{id_member}}/boardStars?key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"members",
+								"{{id_member}}",
+								"boardStars"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a boardStar of Member",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\r",
+									"        \"id\",\r",
+									"        \"idBoard\",\r",
+									"        \"pos\"\r",
+									"    ],\r",
+									"    \"additionalProperties\": true,\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"idBoard\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pos\": {\r",
+									"            \"type\": \"integer\"\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/members/{{id_member}}/boardStars/{{id_star}}?key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"members",
+								"{{id_member}}",
+								"boardStars",
+								"{{id_star}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update the position of a boardStar of Member",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\r",
+									"        \"id\",\r",
+									"        \"idBoard\",\r",
+									"        \"pos\"\r",
+									"    ],\r",
+									"    \"additionalProperties\": true,\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"idBoard\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pos\": {\r",
+									"            \"type\": \"integer\"\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/members/{{id_member}}/boardStars/{{id_star}}?key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"members",
+								"{{id_member}}",
+								"boardStars",
+								"{{id_star}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Star for Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"var expectedSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\r",
+									"        \"_value\"\r",
+									"    ],\r",
+									"    \"additionalProperties\": true,\r",
+									"    \"properties\": {\r",
+									"        \"_value\": {\r",
+									"            \"type\": \"null\"\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"boolean\"\r",
+									"    }\r",
+									"};\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(expectedSchema)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches value: null\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"null\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/members/{{id_member}}/boardStars/{{id_star}}?key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"members",
+								"{{id_member}}",
+								"boardStars",
+								"{{id_star}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a boardStar of Member after delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches: Board star not found\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Board star not found\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/members/{{id_member}}/boardStars/{{id_star}}?key={{APIKey}}&token={{APIToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"members",
+								"{{id_member}}",
+								"boardStars",
+								"{{id_star}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{APIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{APIToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
