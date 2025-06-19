@@ -3,7 +3,7 @@ name: CI (scheduled run)
 on:
   schedule:
     - cron:  '30 3 * * 1-5'
-    - cron:  '45 5 * * 6-7'
+    - cron:  '45 5 * * 0,6'
     
 jobs:
   build:
@@ -18,10 +18,15 @@ jobs:
 
       - name: Установка Newman и Htmlextra
         run: |
-          $ npm install -g newman
+          npm install -g newman
           npm install -g newman-reporter-htmlextra
 
       - name: Запуск коллекции и формаривание отчета Htmlextra
-        run: newman run C:\Users\79527\Desktop\git_ptojectis\Trello_API_Testing\Trello_Marina.postman_collection.json -e C:\Users\79527\Desktop\git_ptojectis\Trello_API_Testing\Environment_Trello.postman_environment.json -r htmlextra    
+        run: newman run Trello_Marina.postman_collection.json \
+             -e Environment_Trello.postman_environment.json \
+             --reporters cli,htmlextra --reporter-htmlextra-export report.html
+
+      - name: Проверка файлов
+        run: ls     
       
           
