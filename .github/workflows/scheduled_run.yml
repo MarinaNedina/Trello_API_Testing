@@ -22,11 +22,13 @@ jobs:
           npm install -g newman-reporter-htmlextra
 
       - name: Запуск коллекции и формаривание отчета Htmlextra
-        run: newman run Trello_Marina.postman_collection.json \
-             -e Environment_Trello.postman_environment.json \
-             --reporters cli,htmlextra --reporter-htmlextra-export report.html
+        run: |
+          newman run "Trello_Marina.postman_collection.json" \
+          -e "Environment_Trello.postman_environment.json" \
+          --reporters cli,htmlextra --reporter-htmlextra-export report.html
 
       - name: Проверка файлов
+        if: always()
         run: ls     
       
           
