@@ -22,10 +22,17 @@ jobs:
           npm install -g newman
           npm install -g newman-reporter-htmlextra
 
-      - name: Запуск коллекции и формаривание отчета Htmlextra
+      - name: Запуск коллекции и формирование отчета Htmlextra
+        env: 
+          API_BASE_URL: ${{ secrets.API_BASE_URL}} 
+          API_TOKEN: ${{ secrets.API_TOKEN}}
+          API_KEY: ${{ secrets.API_KEY}}
         run: |
           newman run "Trello_Marina.postman_collection.json" \
           -e "Environment_Trello.postman_environment.json" \
+          --env-var "base_url = API_BASE_URL" \
+          --env-var "APIKey = API_TOKEN" \
+          --env-var "APIToken = API_KEY" \
           --reporters cli,htmlextra --reporter-htmlextra-export report.html
 
       - name: Прикрепляем отчет к тест-рану
