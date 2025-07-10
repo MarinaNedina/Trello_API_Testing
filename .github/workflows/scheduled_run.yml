@@ -30,9 +30,9 @@ jobs:
         run: |
           newman run "Trello_Marina.postman_collection.json" \
           -e "Environment_Trello.postman_environment.json" \
-          --env-var "base_url = API_BASE_URL" \
-          --env-var "APIKey = API_TOKEN" \
-          --env-var "APIToken = API_KEY" \
+          --env-var "base_url=${API_BASE_URL}" \
+          --env-var "APIKey=${API_KEY}" \
+          --env-var "APIToken=${API_TOKEN}" \
           --reporters cli,htmlextra --reporter-htmlextra-export report.html
 
       - name: Прикрепляем отчет к тест-рану
