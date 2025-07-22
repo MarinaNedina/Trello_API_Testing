@@ -40,31 +40,36 @@ jobs:
           --reporter-json-export summary.json
 
       - name: Прикрепляем отчет к тест-рану
-        if: always()  
+        if: always()
         uses: actions/upload-artifact@v4
         with: 
           name: Postman test report
           path: report.html
 
       - name: Прикрепляем отчет json к тест-рану
-        if: always()  
+        if: always()
         uses: actions/upload-artifact@v4
         with:     
           name: Postman test report json
-          path: sammary.json
-           
+          path: summary.json
 
       - name: Build email subject
         if: always()
         id: email_subject
         run: |
-          passed=$(jq '.stats.successful' summary.json)
-          failed=$(jq '.stats.failed' summary.json)
-          if [[ "${{ steps.run_newman.outcome }}" == "success" ]]; then
-            echo "email_subject=Тесты пройдены: ${passed}, Проваленные тесты: ${failed}" >> $GITHUB_ENV
+          # Проверяем, что файл существует и можно его прочитать
+          if [ -f summary.json ]; then
+            passed=$(jq '.stats.successful' summary.json)
+            failed=$(jq '.stats.failed' summary.json)
+            # Проверяем результат выполнения Newman
+            if [ "${{ steps.run_newman.conclusion }}" == "success" ]; then
+              echo "email_subject=Тесты пройдены: ${passed}, Проваленные тесты: ${failed}" >> $GITHUB_ENV
+            else
+              echo "email_subject=Тесты завершены с ошибками. Пройденные: ${passed}, Проваленные: ${failed}" >> $GITHUB_ENV
+            fi
           else
-            echo "email_subject=Тесты завершены с ошибками. Пройденные: ${passed}, Проваленные: ${failed}" >> $GITHUB_ENV
-          fi     
+            echo "email_subject=Отчет не найден" >> $GITHUB_ENV
+          fi
 
       - name: Send mail 
         if: always()
@@ -74,7 +79,7 @@ jobs:
           server_port: 465    
           username: ${{ secrets.EMAIL_USERNAME }}  
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: ${{ env.email_subject }}  
+          subject: ${{ env.email_subject }}
           body: "Тесты завершены. Подробнее в приложенном отчете."
           html_body: "Please find API test-report attached. This is an automated email."
           to: nedinamarina@gmail.com
