@@ -42,11 +42,17 @@ jobs:
       - name: Прикрепляем отчет к тест-рану
         if: always()  
         uses: actions/upload-artifact@v4
-        with:
+        with: 
           name: Postman test report
-          path: |
-            report.html \
-            summary.json \
+          path: report.html
+
+      - name: Прикрепляем отчет json к тест-рану
+        if: always()  
+        uses: actions/upload-artifact@v4
+        with:     
+          name: Postman test report json
+          path: sammary.json
+           
 
       - name: Build email subject
         if: always()
@@ -55,9 +61,9 @@ jobs:
           passed=$(jq '.stats.successful' summary.json)
           failed=$(jq '.stats.failed' summary.json)
           if [[ "${{ steps.run_newman.outcome }}" == "success" ]]; then
-            echo "email_subject=Тесты пройдены: $passed, Проваленные тесты: $failed" >> $GITHUB_ENV
+            echo "email_subject=Тесты пройдены: ${passed}, Проваленные тесты: ${failed}" >> $GITHUB_ENV
           else
-            echo "email_subject=Тесты завершены с ошибками. Пройденные: $passed, Проваленные: $failed" >> $GITHUB_ENV
+            echo "email_subject=Тесты завершены с ошибками. Пройденные: ${passed}, Проваленные: ${failed}" >> $GITHUB_ENV
           fi     
 
       - name: Send mail 
