@@ -1,11 +1,11 @@
-name: CI (scheduled run)
+name: CI
 
 on:
   schedule:
-    - cron:  '30 3 * * 1-5'
-    - cron:  '45 5 * * 0,6'
+    - cron: '30 3 * * 1-5'
+    - cron: '45 5 * * 0,6'
   workflow_dispatch:
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,9 +26,9 @@ jobs:
       - name: Запуск коллекции и формирование отчета Htmlextra
         id: run_newman
         env: 
-          API_BASE_URL: ${{ secrets.API_BASE_URL}} 
-          API_TOKEN: ${{ secrets.API_TOKEN}}
-          API_KEY: ${{ secrets.API_KEY}}
+          API_BASE_URL: ${{ secrets.API_BASE_URL }} 
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+          API_KEY: ${{ secrets.API_KEY }}
         run: |
           newman run "Trello_Marina.postman_collection.json" \
           -e "Environment_Trello.postman_environment.json" \
@@ -36,7 +36,7 @@ jobs:
           --env-var "APIKey=${API_KEY}" \
           --env-var "APIToken=${API_TOKEN}" \
           --reporters cli,htmlextra,json \
-          --reporter-htmlextra-export report.html
+          --reporter-htmlextra-export report.html \
           --reporter-json-export summary.json
 
       - name: Прикрепляем отчет к тест-рану
@@ -50,16 +50,16 @@ jobs:
         if: always()
         id: email_subject
         run: |
-          passed=$(jq '.stats.successful' summary.json) /
-          failed=$(jq '.stats.failed' summary.json)  /
+          passed=$(jq '.stats.successful' summary.json)
+          failed=$(jq '.stats.failed' summary.json)
           if [[ "${{ steps.run_newman.outcome }}" == "success" ]]; then
             echo "Тесты пройдены: $passed, Проваленные тесты: $failed" >> $GITHUB_ENV
           else
-            echo "Тесты завершены с ошибками. Пройденные: $passed, Проваленные тесты: $failed" >> $GITHUB_ENV
+            echo "Тесты завершены с ошибками. Пройденные: $passed, Проваленные: $failed" >> $GITHUB_ENV
           fi     
 
       - name: Send mail 
-        if: always()  
+        if: always()
         uses: dawidd6/action-send-mail@v6 
         with:   
           server_address: smtp.gmail.com  
@@ -70,7 +70,5 @@ jobs:
           body: "Тесты завершены. Подробнее в приложенном отчете."
           html_body: "Please find API test-report attached. This is an automated email."
           to: nedinamarina@gmail.com
-          from: Nedina_Marina
-          attachments: report.html  
-      
-          
+          from: NedinaMarina
+          attachments: report.html
