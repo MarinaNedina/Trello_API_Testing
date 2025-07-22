@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Установка Node.js
-        uses: actions/setup-node@v4 
+        uses: actions/setup-node@v4
 
       - name: Установка Newman и Htmlextra и jq
         run: |
@@ -25,8 +25,8 @@ jobs:
 
       - name: Запуск коллекции и формирование отчета Htmlextra
         id: run_newman
-        env: 
-          API_BASE_URL: ${{ secrets.API_BASE_URL }} 
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
           API_KEY: ${{ secrets.API_KEY }}
         run: |
@@ -39,47 +39,40 @@ jobs:
           --reporter-htmlextra-export report.html \
           --reporter-json-export summary.json
 
-      - name: Прикрепляем отчет к тест-рану
+      - name: Прикрепляем отчет html к тест-рану
         if: always()
         uses: actions/upload-artifact@v4
-        with: 
+        with:
           name: Postman test report
           path: report.html
 
       - name: Прикрепляем отчет json к тест-рану
         if: always()
         uses: actions/upload-artifact@v4
-        with:     
+        with:
           name: Postman test report json
           path: summary.json
 
       - name: Build email subject
         if: always()
-        id: email_subject
         run: |
-          # Проверяем, что файл существует и можно его прочитать
-          if [ -f summary.json ]; then
-            passed=$(jq '.stats.successful' summary.json)
-            failed=$(jq '.stats.failed' summary.json)
-            # Проверяем результат выполнения Newman
-            if [ "${{ steps.run_newman.conclusion }}" == "success" ]; then
-              echo "email_subject=Тесты пройдены: ${passed}, Проваленные тесты: ${failed}" >> $GITHUB_ENV
-            else
-              echo "email_subject=Тесты завершены с ошибками. Пройденные: ${passed}, Проваленные: ${failed}" >> $GITHUB_ENV
-            fi
+          DATE_MST=$(TZ='Europe/Moscow' date '+%B %d %Y at %H:%M %Z')
+          if [[ "${{ steps.run_newman.outcome }}" == "success" ]]; then
+            echo "EMAIL_SUBJECT=Trello API Test Report - No Failed Tests - ${DATE_MST}" >> $GITHUB_ENV
           else
-            echo "email_subject=Отчет не найден" >> $GITHUB_ENV
+            FAILED_COUNT=$(jq '.run.failures | length' summary.json)
+            echo "EMAIL_SUBJECT=Trello API Test Report - ${FAILED_COUNT} Failed Tests - ${DATE_MST}" >> $GITHUB_ENV
           fi
 
-      - name: Send mail 
+      - name: Отправка письма
         if: always()
-        uses: dawidd6/action-send-mail@v6 
-        with:   
-          server_address: smtp.gmail.com  
-          server_port: 465    
-          username: ${{ secrets.EMAIL_USERNAME }}  
+        uses: dawidd6/action-send-mail@v6
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: ${{ env.email_subject }}
+          subject: ${{ env.EMAIL_SUBJECT }}
           body: "Тесты завершены. Подробнее в приложенном отчете."
           html_body: "Please find API test-report attached. This is an automated email."
           to: nedinamarina@gmail.com
