@@ -44,7 +44,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Postman test report
-          path: report.html, summary.json 
+          path: |
+            report.html \
+            summary.json \
 
       - name: Build email subject
         if: always()
@@ -53,9 +55,9 @@ jobs:
           passed=$(jq '.stats.successful' summary.json)
           failed=$(jq '.stats.failed' summary.json)
           if [[ "${{ steps.run_newman.outcome }}" == "success" ]]; then
-            echo "Тесты пройдены: $passed, Проваленные тесты: $failed" >> $GITHUB_ENV
+            echo "email_subject=Тесты пройдены: $passed, Проваленные тесты: $failed" >> $GITHUB_ENV
           else
-            echo "Тесты завершены с ошибками. Пройденные: $passed, Проваленные: $failed" >> $GITHUB_ENV
+            echo "email_subject=Тесты завершены с ошибками. Пройденные: $passed, Проваленные: $failed" >> $GITHUB_ENV
           fi     
 
       - name: Send mail 
